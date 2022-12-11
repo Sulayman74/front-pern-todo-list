@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 
 import EditModal from "./editModal";
 
-const URL = "http://localhost:5050/api/todos";
+const URL = "http://localhost:5050/api/todos/";
 
 
 // ** je créer mon components ici */
@@ -13,15 +13,15 @@ const ListTodos = () => {
     const [todos, setTodos] = useState([]);
 
     // ** fonction qui permet d'effacer une tâche en asynchrone try catch */
-    const deleteTodo = async (id) => {
+    const deleteTodo = async (req, res) => {
         try {
-
-            const deleteTodo = await fetch(URL + "/" + id + "/delete",
+            console.log("test", req);
+            const deleteTodo = await fetch(URL + "delete/" + req,
                 {
                     method: "DELETE"
                 });
             console.warn(deleteTodo);
-            setTodos(todos.filter(todo => todo.todo_id !== id))
+            setTodos(todos.filter(todo => todo.todo_id !== req))
         } catch (error) {
             console.error(error.message);
         }
@@ -29,7 +29,7 @@ const ListTodos = () => {
     // ** fonction qui permet de lire tout les todos en asynchrone try catch */
     const getTodos = async () => {
         try {
-            const response = await fetch(URL + "/allTodos")
+            const response = await fetch(URL + "allTodos")
             const jsonData = await response.json()
             setTodos(jsonData);
 

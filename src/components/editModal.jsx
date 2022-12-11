@@ -12,7 +12,7 @@ const EditModal = ({ todo }) => {
     e.preventDefault();
     try {
       const body = { description };
-      const response = await fetch(URL + todo.todo_id + "/update", {
+      const response = await fetch(URL+"/update/"+todo.todo_id , {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -58,7 +58,7 @@ const EditModal = ({ todo }) => {
                 onClick={(e) => upDateTask(e)}
                 className="btn btn-success"
                 data-bs-dismiss="modal">
-                Ok
+                Edition
               </button>
               <button className="btn btn-danger" data-bs-dismiss="modal">
                 Close
